@@ -14,7 +14,6 @@
     overflow: hidden;
   }
 
-  /* Opening Countdown */
   #startScreen {
     position: fixed;
     width: 100%;
@@ -83,12 +82,10 @@
 
 <body>
 
-<!-- Opening Countdown -->
 <div id="startScreen">
   <div id="startCount">3</div>
 </div>
 
-<!-- Music -->
 <audio id="bgMusic" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
 </audio>
@@ -99,15 +96,15 @@
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
   <h1>🎂 Happy Birthday papuu ❤️🎂</h1>
-  <img src="https://tse3.mm.bing.net/th/id/OIP.5snf3rWGsThH-KXjUXcgywHaEK?rs=1&pid=ImgDetMain&o=7&rm=3">
-  <p><i>BE HAPPY yavaglu nagthiri 💖</i></p>
+  <img src="https://tse3.mm.bing.net/th/id/OIP.5snf3rWGsThH-KXjUXcgywHaEK">
+  <p><i>BE Happy yavaglu nagthiri 💖</i></p>
   <button onclick="nextPage(2)">Next ⏭️</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="page2">
   <h1>🎂 Cake Time 🎂</h1>
-  <img src="https://tse1.explicit.bing.net/th/id/OIP.LaHWYFfnsTJQ8ABTFyzbYAHaF7?w=3000&h=2400&rs=1&pid=ImgDetMain&o=7&rm=3">
+  <img src="https://tse1.explicit.bing.net/th/id/OIP.LaHWYFfnsTJQ8ABTFyzbYAHaF7">
   <p>cut the cake 🎉</p>
   <button onclick="startConfetti()">Cut Cake 🎂</button>
   <button onclick="nextPage(3)">Next ➡️</button>
@@ -115,8 +112,8 @@
 
 <!-- PAGE 3 -->
 <div class="page" id="page3">
-  <h1>🎉 Special Message 🎉</h1>
-  <img src="https://th.bing.com/th/id/R.68ca7ee5bee024205d6c5ced2acdc5f4?rik=hCQXRAONJGb4Gw&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f6%2fe%2f1%2f952521-beautiful-cute-teddy-bear-wallpaper-1920x1524.jpg&ehk=BVXqcAGG5rfKbGrQUl9KpgAYlhkWLB7GadeSG3HnRXE%3d&risl=&pid=ImgRaw&r=0" alt="teedy for my teedy ">
+  <h1>🎉 Special person 🎉</h1>
+  <img src="https://tse3.mm.bing.net/th/id/OIP.aUEiFYv4FizVGwKU9N0YrwHaF4?rs=1&pid=ImgDetMain&o=7&rm=3">
   <pre>
 Two things will never change about u 
 ondu nim mele ero prithi 
@@ -125,8 +122,25 @@ yavaglu niv nan mans ale erthira
 niv andre nange thomba esta aduna helakeagthila🥺🥹
 Thankss estond Memories Kotidake 
 once again Happy Birthday papuu ❤️😁
+
   </pre>
-  <button onclick="startConfetti()">Celebrate 🎉</button>
+  <button onclick="nextPage(4)">Final Surprise 🎁</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <h1>🎁 Final Surprise 🎁</h1>
+
+  <img id="giftBox" 
+       src="https://cdn-icons-png.flaticon.com/512/869/869636.png" 
+       style="width:150px; cursor:pointer;" 
+       onclick="openGift()">
+
+  <p id="surpriseText" style="display:none; font-size:1.5rem; margin-top:20px;">
+    LOT OF LOVE FOR u ond chance kodthiya❤️🥹
+  </p>
+
+  <button onclick="startConfetti()">Celebrate Again 🎉</button>
 </div>
 
 <script>
@@ -136,13 +150,11 @@ const startEl = document.getElementById("startCount");
 
 const startInterval = setInterval(() => {
   start--;
-
   if (start > 0) {
     startEl.innerText = start;
   } else {
     startEl.innerText = "🎉";
     clearInterval(startInterval);
-
     setTimeout(() => {
       document.getElementById("startScreen").style.display = "none";
     }, 800);
@@ -155,9 +167,8 @@ function nextPage(pageNumber) {
   document.getElementById('page' + pageNumber).classList.add('active');
 }
 
-// 🔥 FIXED MUSIC (plays on first click anywhere)
+// Music Fix
 let musicStarted = false;
-
 function playMusicOnce() {
   if (!musicStarted) {
     const music = document.getElementById("bgMusic");
@@ -166,7 +177,6 @@ function playMusicOnce() {
     }).catch(() => {});
   }
 }
-
 document.addEventListener("click", playMusicOnce);
 
 // Confetti
@@ -202,17 +212,15 @@ function drawConfetti() {
   });
 }
 
-// Countdown + Confetti
 function startConfetti() {
   const countdownEl = document.getElementById("countdown");
-  let count = 5;
+  let count = 2;
 
   countdownEl.style.display = "block";
   countdownEl.innerText = count;
 
   const interval = setInterval(() => {
     count--;
-
     if (count > 0) {
       countdownEl.innerText = count;
     } else {
@@ -226,6 +234,17 @@ function startConfetti() {
       }, 500);
     }
   }, 1000);
+}
+
+// 🎁 Gift Surprise
+function openGift() {
+  const text = document.getElementById("surpriseText");
+  const box = document.getElementById("giftBox");
+
+  box.src = "https://www.pngmart.com/files/17/Gift-Box-PNG-Photos.png";
+  text.style.display = "block";
+
+  startConfetti();
 }
 </script>
 
